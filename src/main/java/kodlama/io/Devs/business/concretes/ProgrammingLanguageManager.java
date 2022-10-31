@@ -23,16 +23,10 @@ public class ProgrammingLanguageManager implements LanguageService {
 
     @Override
     public void add(String name) {
-        if (name==""){
-            System.out.println("Programlama ismi boş geçilemez!");
-            return;
+        if (name=="" || name==null){
+            throw new RuntimeException("Dil adı boş geçilemez");
         }
-        for (ProgrammingLanguage lang:languageRepository.getAll()){
-            if (lang.getName()==name){
-                System.out.println("Bu programlama dili zaten mevcut!");
-                return;
-            }
-        }
+        isLanguageExists(name);
         languageRepository.add(name);
     }
 
@@ -43,6 +37,12 @@ public class ProgrammingLanguageManager implements LanguageService {
 
     @Override
     public void update(int id, String name) {
+        isLanguageExists(name);
         languageRepository.update(id,name);
+    }
+    public void isLanguageExists(String name){
+        if (languageRepository.getAll().stream().anyMatch(x -> x.getName().equals(name))){
+            throw new RuntimeException(name+" isminde bir kayıt zaten mevcut");
+        }
     }
 }

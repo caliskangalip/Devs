@@ -22,4 +22,17 @@ public class LanguagesController {
     public List<ProgrammingLanguage> getAll(){
         return languageService.getAll();
     }
+    //add, delete, update
+    @GetMapping("/add")
+    public void add(String name){
+        languageService.add(name.toUpperCase());
+    }
+    @GetMapping("/delete")
+    public void delete(int id){
+        languageService.delete(id);
+    }
+    @GetMapping("/update")
+    public void update(int id, String name){
+        languageService.update(id, name.toUpperCase());
+    }
 }

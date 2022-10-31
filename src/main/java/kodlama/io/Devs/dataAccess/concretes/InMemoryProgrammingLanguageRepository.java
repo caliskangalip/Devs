@@ -6,6 +6,9 @@ import kodlama.io.Devs.entities.concretes.ProgrammingLanguage;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
+@Repository
 public class InMemoryProgrammingLanguageRepository implements LanguageRepository {
     List<ProgrammingLanguage> languages;
 
